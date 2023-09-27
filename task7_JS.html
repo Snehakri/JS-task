@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Animation</title>
+    <style>
+        #train {
+            width: 100px;
+            height: 50px;
+            background-color: rgb(9, 114, 12);
+
+            position: absolute;
+            left: 0;
+            transition: left 2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <button id="startButton">Start</button>
+    <button id="stopButton">Stop</button>
+    <div id="train"></div>
+
+    <script>
+        const train = document.getElementById("train");
+        const startButton = document.getElementById("startButton");
+        const stopButton = document.getElementById("stopButton");
+        let isMoving = false;
+        let animationInterval;
+
+        startButton.addEventListener("click", () => {
+            if (!isMoving) {
+                isMoving = true;
+                animationInterval = setInterval(moveTrain, 2000);
+                moveTrain();
+            }
+        });
+
+        stopButton.addEventListener("click", () => {
+            clearInterval(animationInterval);
+            isMoving = false;
+        });
+
+        function moveTrain() {
+            const currentPosition = parseInt(train.style.left) || 0;
+            const newPosition = currentPosition === 0 ? 300 : 0;
+            train.style.left = newPosition + "px";
+        }
+    </script>
+</body>
+</html>
